@@ -27,6 +27,10 @@
 >
 > 本仓库打包的是一个 Codex skill，以及两个轻量级 GitHub Search API 辅助脚本。它用于研究公开开源证据；它不是自动修复器，不是漏洞扫描器，也不保证 GitHub 一定有答案。
 
+## 友链 / Community
+
+本项目接受 LINUX DO 社区佬友监督与反馈：[LINUX DO](https://linux.do/)
+
 ## 简体中文
 
 ### 项目定位
