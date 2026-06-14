@@ -24,11 +24,18 @@ High Stars can put a repository near the top of the inspection list and break ti
 
 ## Search Surface Handling
 
+- Use GitHub CLI first. Prefer `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh issue view`, `gh pr view`, and `gh api` before browser scraping or custom scripts.
 - Search issues and PRs first for errors, regressions, dependency upgrades, framework behavior, and integration failures.
 - Search code/examples first for API usage, config shape, feature implementation, or unclear integration patterns.
 - Search repositories when the problem is an implementation blocker, tool/capability need, or reusable project search where a complete project can reveal architecture or workflow.
 - For repository candidates, start with high-Star active projects, then lower the Star threshold when high-Star projects are too broad or miss the exact need.
 - Use Stars and forks as maturity context and tie-breakers. They should not outweigh exact problem evidence.
+
+## Subagent Handling
+
+Subagents are conditional. Use them when the problem spans independent ecosystems, query families, repositories, versions, or evidence surfaces. Skip them when the task has one obvious repository or API surface, when local context must be understood first, or when authorization, private repositories, secrets, sensitive logs, or production data would make delegation risky.
+
+When subagents are used, rank only after merging and deduplicating repeated reports of the same repo, issue, PR, discussion, code path, or release. The controller must directly verify the strongest claims before presenting them as evidence.
 
 ## Output Fields
 
@@ -52,5 +59,14 @@ For each issue/PR/code/release evidence item, capture:
 - proposed solution or pattern;
 - key risk or mismatch;
 - rank or score rationale.
+
+If subagents were used, also capture:
+
+- subagent scope and assigned query family;
+- evidence surfaces searched;
+- key findings and direct links;
+- rejected candidates and rejection reasons;
+- deduplication results;
+- controller verified claims.
 
 Use exact metadata only when verified in the current run. If metadata may be stale, label it as such.

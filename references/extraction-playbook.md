@@ -4,6 +4,8 @@ Use this playbook after GitHub evidence or repository candidates have been found
 
 ## Read in This Order
 
+Use GitHub CLI (`gh`) as the default inspection entrypoint before browser scraping or custom scripts. Start from `gh search repos`, `gh search issues`, `gh search prs`, `gh search code`, `gh repo view`, `gh issue view`, `gh pr view`, and `gh api`, then deep-read the strongest evidence.
+
 1. Repository README/docs for candidate projects to identify what the project does, its public workflow/API, setup path, stated limitations, and license.
 2. Examples, templates, source code, tests, and fixtures that show the correct implementation or configuration shape.
 3. Matching issues, PRs, or discussions to identify known edge cases, affected versions, maintainer stance, and fixes or workarounds.
@@ -34,6 +36,12 @@ The local recommendation should say:
 
 When a repository itself is a candidate solution, include a compact table in the answer with repo, Stars, forks, language, license, activity, basic content, fit, and local adaptation. When the strongest evidence is an issue/PR/code example rather than a reusable project, the project table is optional.
 
+## Subagent Evidence Handling
+
+Subagents are conditional research aids, not a default requirement. If they are used, the controller must merge and deduplicate their findings, then directly verify the strongest claims with `gh`, source reads, tests, logs, real requests, or official docs before finalizing.
+
+The final answer should include a subagent trace with each subagent's scope, evidence surfaces, key findings, rejected candidates, deduplication results, and controller verified claims.
+
 ## Avoid These Failure Modes
 
 - Searching only high-star repositories when the problem is an error or regression.
@@ -44,6 +52,7 @@ When a repository itself is a candidate solution, include a compact table in the
 - Rewriting a mature solution instead of adapting its public workflow to the local codebase.
 - Recommending a workaround when a released fix exists.
 - Claiming GitHub evidence exists without direct links to the relevant issue, PR, code, example, or release.
+- Passing tokens, cookies, private repository contents, sensitive logs, secrets, production data, or credentials to subagents.
 
 ## Evidence Standard
 
